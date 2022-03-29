@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form Validation</title>
+</head>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<body class="container">
+
+<br>
+	<h1 class="text-center">Login</h1>
+	<hr>
+<br>
+
+<form onsubmit="return valiform()">
+
+ <div class="form-group">
+	<label>User Name : </label>
+	<input type="text" class="form-control" id="user" name="user">
+	<span id="user_error" class="text-danger"><b></b></span>
+ </div>
+
+ <div class="form-group">
+	<label>Email : </label>
+	<input type="email" class="form-control" id="email" name="email">
+	<span id="email_error" class="text-danger"><b></b></span>
+ </div>
+
+ <div class="form-group">
+	<label>Phone : </label>
+	<input type="text" class="form-control" id="phone" name="phone">
+	<span id="phone_error" class="text-danger"><b></b></span>
+ </div>
+
+ <div class="form-group">
+	<label>Password : </label>
+	<input type="password" class="form-control" id="password" name="password">
+	<!-- <input type="checkbox" onchange="pass_show()"> -->
+	<span id="password_error" class="text-danger"><b></b></span>
+ </div>
+
+ <div class="form-group">
+	<label>Confirm Password : </label>
+	<input type="password" class="form-control" id="confirm_pass" name="confirm_pass">
+	<!-- <input type="checkbox" onchange="cnf_show()"> -->
+	<span id="confirm_error" class="text-danger"><b></b></span>
+ </div>
+    
+    <center><button type="submit" class="btn btn-success">Registration</button></center>
+
+</form>
+
+<hr>
+
+</body>
+<script>
+	
+// function start point	
+function valiform(){
+    
+    // input / id values
+	var user = document.getElementById("user").value;
+    var email = document.getElementById("email").value;
+    var phone = document.getElementById("phone").value;
+    var password = document.getElementById("password").value;
+    var confirm_pass = document.getElementById("confirm_pass").value;
+    
+    // regex pattran
+	var user_ck = /^[A-Za-z0-9-_]{3,16}$/;
+	var email_ck = /^[A-Za-z_-]{3,}@.[A-Za-z_]{3,}[.][a-z.]{3,6}$/;
+	// /^[A-Za-z_-]{3,}@.[A-Za-z_]{3,}[.][a-z.]{3,6}$/
+	// /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    var phone_ck = /^[03]{2}[0-9]{9}$/;
+    var password_ck = /^(?=.*[0-9])[A-Za-z0-9!@#$%^&*_-]{8,16}$/;
+
+    // logics
+	if(user_ck.test(user)){
+	    document.getElementById("user_error").innerHTML="";
+	}else{
+		document.getElementById("user_error").innerHTML="Atleast 3 charaters Put !";
+		return false;
+	}
+
+
+	if(email_ck.test(email)){
+	    document.getElementById("email_error").innerHTML="";
+	}else{
+		document.getElementById("email_error").innerHTML="Invalid Email Please Check Again !";
+		return false;
+	}
+
+	if(phone_ck.test(phone)){
+	    document.getElementById("phone_error").innerHTML="";
+	}else{
+		document.getElementById("phone_error").innerHTML="Check Your Contact Number Lenght Or start '03'";
+		return false;
+	}
+			
+
+	if(password_ck.test(password)){
+	    document.getElementById("password_error").innerHTML="";
+	}else{
+		document.getElementById("password_error").innerHTML="Password Most Be Max 8 charaters !";
+		return false;
+	}
+
+
+	if(confirm_pass.match(password)){
+	    document.getElementById("confirm_error").innerHTML="";
+	}else{
+		document.getElementById("confirm_error").innerHTML="Password Dose Not Match !";
+		return false;
+	}
+
+
+ } // function start point
+
+
+
+//eye password show or hidde
+
+function pass_show() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+      x.type = "text";
+  } else {
+      x.type = "password";
+  }
+}
+
+function cnf_show() {
+  var x = document.getElementById("confirm_pass");
+  if (x.type === "password") {
+      x.type = "text";
+  } else {
+      x.type = "password";
+  }
+}
+
+
+</script>
+</html>
